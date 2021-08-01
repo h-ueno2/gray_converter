@@ -18,7 +18,7 @@ class FileReader:
 
     def read(self):
         if Path.is_dir(Path(self.path)):
-            return [FileInfo(f)
+            return [FileInfo(os.path.join(self.path, f))
                     for f in os.listdir(self.path)
                     if self.is_image_file(f)]
 

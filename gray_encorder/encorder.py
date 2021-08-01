@@ -18,9 +18,9 @@ class GrayEncorder:
     def exec(self):
         for img in self.imgs:
             gray = self._encode(img.file_path)
-            output_path = img.output_file_path(self.is_overwrite)
-            if not os.path.exists(output_path):
-                os.mkdir(output_path)
+
+            if not os.path.exists(img.output_dir_path(self.is_overwrite)):
+                os.mkdir(img.output_dir_path(self.is_overwrite))
             cv2.imwrite(img.output_file_path(self.is_overwrite), gray)
 
     def _encode(self, file):
