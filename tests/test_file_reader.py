@@ -18,3 +18,19 @@ class IsImageFileTest(unittest.TestCase):
             with self.subTest(**param):
                 actual = reader.is_image_file(param['target'])
                 self.assertEqual(True, actual)
+
+    def test_not_is_image_file(self):
+        from gray_encorder.file_reader import FileReader
+
+        params = (
+            {'target': 'test.JP'},
+            {'target': 'test.txt'},
+            {'target': 'test.md'},
+            {'target': ''},
+            {'target': None},
+        )
+        reader = FileReader('')
+        for param in params:
+            with self.subTest(**param):
+                actual = reader.is_image_file(param['target'])
+                self.assertEqual(False, actual)

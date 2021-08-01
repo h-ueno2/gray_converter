@@ -14,6 +14,8 @@ class FileReader:
         return os.path.exists(self.path)
 
     def is_image_file(self, filename: str) -> bool:
+        if not filename:
+            return False
         return filename.endswith(self.PREFIXS)
 
     def read(self):
