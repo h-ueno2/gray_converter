@@ -13,7 +13,6 @@ class FileInfo:
     def file_name(self):
         return self.file_path.name
 
-    @property
     def output_file_path(self, is_overwrite):
         if is_overwrite:
             return self.file_path
