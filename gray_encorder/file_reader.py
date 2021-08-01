@@ -1,7 +1,6 @@
 from pathlib import Path
-from typing import OrderedDict
 import os
-from file_info import FileInfo
+from gray_encorder.file_info import FileInfo
 
 
 class FileReader:
