@@ -1,12 +1,12 @@
 from gray_encorder.file_info import FileInfo
 import cv2
 import os
-import numpy as np
+from typing import List
 
 
 class GrayEncorder:
 
-    def __init__(self, imgs: list[FileInfo], is_overwrite: bool) -> None:
+    def __init__(self, imgs: List[FileInfo], is_overwrite: bool) -> None:
         """画像をグレースケールに変換する処理クラスです。
 
         Args:
