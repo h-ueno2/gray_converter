@@ -1,5 +1,6 @@
 from pathlib import Path
 import os
+from typing import List
 from gray_encorder.file_info import FileInfo
 
 
@@ -18,7 +19,7 @@ class FileReader:
             return False
         return filename.endswith(self.PREFIXS)
 
-    def read(self):
+    def read(self) -> List[FileInfo]:
         if Path.is_dir(Path(self.path)):
             return [FileInfo(os.path.join(self.path, f))
                     for f in os.listdir(self.path)

@@ -1,7 +1,7 @@
 from gray_encorder.file_info import FileInfo
 import cv2
 import os
-from typing import List
+from typing import List, Any
 
 
 class GrayEncorder:
@@ -15,7 +15,7 @@ class GrayEncorder:
         self.imgs = imgs
         self.is_overwrite = is_overwrite
 
-    def exec(self):
+    def exec(self) -> None:
         for img in self.imgs:
             gray = self._encode(img.file_path)
 
@@ -23,6 +23,6 @@ class GrayEncorder:
                 os.mkdir(img.output_dir_path(self.is_overwrite))
             cv2.imwrite(img.output_file_path(self.is_overwrite), gray)
 
-    def _encode(self, file):
-        img = cv2.imread(file)
+    def _encode(self, file_path: str) -> Any:
+        img = cv2.imread(file_path)
         return cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)

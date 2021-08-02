@@ -11,7 +11,7 @@ class FileInfo:
         self.parent_dir = self._path.parent
 
     @property
-    def file_name(self):
+    def file_name(self) -> str:
         return self._path.name
 
     def output_file_path(self, is_overwrite: bool) -> str:

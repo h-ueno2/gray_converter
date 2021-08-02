@@ -7,7 +7,7 @@ import click
 @click.argument('target_path')
 @click.option('--is_overwrite', default='0',
               help='1を指定した時、ファイルを上書きします。')
-def cli(target_path, is_overwrite):
+def cli(target_path: str, is_overwrite: str) -> None:
     if not target_path:
         print("対象のディレクトリまたはファイルを指定して下さい。")
         return
@@ -21,7 +21,7 @@ def cli(target_path, is_overwrite):
     encorder.exec()
 
 
-def to_is_overwrite(arg):
+def to_is_overwrite(arg: str) -> bool:
     if not arg:
         return False
     if arg == '1':
