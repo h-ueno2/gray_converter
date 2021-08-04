@@ -16,6 +16,8 @@ class GrayEncorder:
         self.is_overwrite = is_overwrite
 
     def exec(self) -> None:
+        """グレースケールの変換処理を行います。
+        """
         for img in self.imgs:
             gray = self._encode(img.file_path)
 

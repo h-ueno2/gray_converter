@@ -8,6 +8,13 @@ import click
 @click.option('--is_overwrite', default='0',
               help='1を指定した時、ファイルを上書きします。')
 def cli(target_path: str, is_overwrite: str) -> None:
+    """指定したパスの画像ファイルをグレースケールに変換します。
+
+    Args:
+        target_path (str): 対象パス
+        is_overwrite (str): 元ファイルを上書きする場合、1を指定します。
+        1以外の場合、同階層に`gray`ディレクトリを作成し、その下に変換後のファイルを配置します。
+    """
     if not target_path:
         print("対象のディレクトリまたはファイルを指定して下さい。")
         return
@@ -22,6 +29,14 @@ def cli(target_path: str, is_overwrite: str) -> None:
 
 
 def to_is_overwrite(arg: str) -> bool:
+    """コマンドライン引数で指定された`is_overwrite`フラグをbool型に変換します。
+
+    Args:
+        arg (str): コマンドライン引数`is_overwrite`の値
+
+    Returns:
+        bool: 1の時`True`を返却。1以外の時は`False`を返却。
+    """
     if not arg:
         return False
     if arg == '1':
