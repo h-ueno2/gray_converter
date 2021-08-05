@@ -38,16 +38,22 @@ class FileReader:
             return False
         return filename.endswith(self.PREFIXS)
 
-    def read(self) -> List[FileInfo]:
+    def read(self, is_overwrite: bool) -> List[FileInfo]:
         """指定したパスがディレクトリだった場合、ディレクトリ以下の画像ファイルをリスト型式で返却します。
         指定したパスがファイルだった場合、ファイルパスをリストに含めて返却します。
+
+        Args:
+            is_overwrite (bool): 上書きフラグ
+
+        Returns:
+            List[FileInfo]: 対象の画像ファイル一覧
         """
         if Path.is_dir(Path(self.path)):
-            return [FileInfo(os.path.join(self.path, f))
+            return [FileInfo(os.path.join(self.path, f), is_overwrite)
                     for f in os.listdir(self.path)
                     if self.is_image_file(f)]
 
         if not self.is_image_file(Path(self.path).name):
             return []
 
-        return [FileInfo(self.path)]
+        return [FileInfo(self.path,  is_overwrite)]

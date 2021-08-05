@@ -23,8 +23,8 @@ def cli(target_path: str, is_overwrite: str) -> None:
     if not reader.is_exists:
         print("指定したパスに画像ファイルがありません。")
         return
-    list = reader.read()
-    encorder = GrayEncorder(list, is_overwrite)
+    list = reader.read(is_overwrite)
+    encorder = GrayEncorder(list)
     encorder.exec()
 
 

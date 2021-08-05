@@ -6,14 +6,13 @@ from typing import List, Any
 
 class GrayEncorder:
 
-    def __init__(self, imgs: List[FileInfo], is_overwrite: bool) -> None:
+    def __init__(self, imgs: List[FileInfo]) -> None:
         """画像をグレースケールに変換する処理クラスです。
 
         Args:
             imgs (list[str]): GrayScale対象の画像一覧
         """
         self.imgs = imgs
-        self.is_overwrite = is_overwrite
 
     def exec(self) -> None:
         """グレースケールの変換処理を行います。
@@ -21,9 +20,9 @@ class GrayEncorder:
         for img in self.imgs:
             gray = self._encode(img.file_path)
 
-            if not os.path.exists(img.output_dir_path(self.is_overwrite)):
-                os.mkdir(img.output_dir_path(self.is_overwrite))
-            cv2.imwrite(img.output_file_path(self.is_overwrite), gray)
+            if not os.path.exists(img.output_dir_path):
+                os.mkdir(img.output_dir_path)
+            cv2.imwrite(img.output_file_path, gray)
 
     def _encode(self, file_path: str) -> Any:
         img = cv2.imread(file_path)
