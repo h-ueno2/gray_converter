@@ -6,18 +6,10 @@ import click
 @click.command()
 @click.argument('target_path')
 @click.option('--is_overwrite', default='0',
-              help='1を指定した時、ファイルを上書きします。')
+              help='1を指定した時、変換後に元ファイルを上書きします。')
 def cli(target_path: str, is_overwrite: str) -> None:
     """指定したパスの画像ファイルをグレースケールに変換します。
-
-    Args:
-        target_path (str): 対象パス
-        is_overwrite (str): 元ファイルを上書きする場合、1を指定します。
-        1以外の場合、同階層に`gray`ディレクトリを作成し、その下に変換後のファイルを配置します。
     """
-    if not target_path:
-        print("対象のディレクトリまたはファイルを指定して下さい。")
-        return
     is_overwrite = to_is_overwrite(is_overwrite)
     reader = FileReader(target_path)
     if not reader.is_exists:
