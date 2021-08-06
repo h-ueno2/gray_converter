@@ -38,7 +38,7 @@ class FileReader:
             return False
         return filename.endswith(self.PREFIXS)
 
-    def read(self, is_overwrite: bool) -> List[FileInfo]:
+    def list(self, is_overwrite: bool) -> List[FileInfo]:
         """指定したパスがディレクトリだった場合、ディレクトリ以下の画像ファイルをリスト型式で返却します。
         指定したパスがファイルだった場合、ファイルパスをリストに含めて返却します。
 
