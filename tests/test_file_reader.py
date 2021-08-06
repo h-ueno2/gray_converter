@@ -1,3 +1,4 @@
+from gray_encorder.file_info import FileInfo
 import unittest
 from tempfile import TemporaryDirectory
 import os
@@ -57,3 +58,62 @@ class IsImageFileTest(unittest.TestCase):
             with self.subTest(**param):
                 actual = reader.is_image_file(param['target'])
                 self.assertEqual(False, actual)
+
+
+class ListTest(unittest.TestCase):
+    def setUp(self) -> None:
+        self.tmp = TemporaryDirectory()
+        self.test_img_1 = os.path.join(self.tmp.name, 'test_img_1.png')
+        self.test_img_2 = os.path.join(self.tmp.name, 'test_img_2.png')
+        self.test_text = os.path.join(self.tmp.name, 'test_text.txt')
+        test_paths = [
+            self.test_img_1,
+            self.test_img_2,
+            self.test_text,
+        ]
+        for file in test_paths:
+            with open(file,  'w') as f:
+                f.write('')
+
+    def tearDown(self) -> None:
+        self.tmp.cleanup()
+
+    def test_dir_list(self):
+        from gray_encorder.file_reader import FileReader
+
+        reader = FileReader(self.tmp.name)
+        actuals = reader.list(True)
+        expecteds = [
+            FileInfo(self.test_img_1, True),
+            FileInfo(self.test_img_2, True),
+        ]
+
+        self.assertEqual(len(expecteds), len(actuals))
+        for expected, actual in zip(expecteds, actuals):
+            self.assertEqual(expected.file_name, actual.file_name)
+            self.assertEqual(expected.output_file_path,
+                             actual.output_file_path)
+
+    def test_file_list(self):
+        from gray_encorder.file_reader import FileReader
+
+        reader = FileReader(self.test_img_1)
+        actuals = reader.list(True)
+        expecteds = [
+            FileInfo(self.test_img_1, True),
+        ]
+
+        self.assertEqual(len(expecteds), len(actuals))
+        for expected, actual in zip(expecteds, actuals):
+            self.assertEqual(expected.file_name, actual.file_name)
+            self.assertEqual(expected.output_file_path,
+                             actual.output_file_path)
+
+    def test_not_image_file(self):
+        from gray_encorder.file_reader import FileReader
+
+        reader = FileReader(self.test_text)
+        actuals = reader.list(True)
+        expecteds = []
+
+        self.assertEqual(len(expecteds), len(actuals))
