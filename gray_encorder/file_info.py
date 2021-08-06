@@ -46,5 +46,5 @@ class FileInfo:
             str: 変換後ファイルを配置するディレクトリパス。
         """
         if self.is_overwrite:
-            return self.parent_dir
+            return str(self.parent_dir)
         return os.path.join(self.parent_dir, self.OUTPUT_DIR_NAME)
